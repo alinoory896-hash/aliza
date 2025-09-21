@@ -9,69 +9,69 @@
 </head>
 <body>
 <header>
-<h1>🏋️‍♂️ سوپر اپ فیتنس</h1>
-<button id="toggleTheme">🌓 تغییر تم</button>
+  <h1>🏋️‍♂️ سوپر اپ فیتنس</h1>
+  <button id="toggleTheme">🌓 تغییر تم</button>
 </header>
 
 <main>
-<!-- داشبورد -->
-<section id="dashboard">
-<h2>📊 داشبورد</h2>
-<canvas id="progressChart"></canvas>
-<canvas id="weightChart"></canvas>
-<div id="motivationCard"></div>
-</section>
+  <!-- داشبورد -->
+  <section id="dashboard">
+    <h2>📊 داشبورد</h2>
+    <canvas id="progressChart"></canvas>
+    <canvas id="weightChart"></canvas>
+    <div id="motivationCard"></div>
+  </section>
 
-<!-- مدیریت وعده‌ها -->
-<section id="meals">
-<h2>🍽️ مدیریت وعده‌ها</h2>
-<form id="mealForm">
-<input type="text" id="mealName" placeholder="نام غذا">
-<input type="number" id="mealCalories" placeholder="کالری">
-<input type="number" id="mealProtein" placeholder="پروتئین">
-<input type="number" id="mealCarbs" placeholder="کربوهیدرات">
-<input type="number" id="mealFat" placeholder="چربی">
-<button type="submit">➕ اضافه</button>
-</form>
-<ul id="mealList"></ul>
-<p id="mealSummary">جمع کل کالری: 0</p>
-</section>
+  <!-- مدیریت وعده‌ها -->
+  <section id="meals">
+    <h2>🍽️ مدیریت وعده‌ها</h2>
+    <form id="mealForm">
+      <input type="text" id="mealName" placeholder="نام غذا">
+      <input type="number" id="mealCalories" placeholder="کالری">
+      <input type="number" id="mealProtein" placeholder="پروتئین">
+      <input type="number" id="mealCarbs" placeholder="کربوهیدرات">
+      <input type="number" id="mealFat" placeholder="چربی">
+      <button type="submit">➕ اضافه</button>
+    </form>
+    <ul id="mealList"></ul>
+    <p id="mealSummary">جمع کل کالری: 0</p>
+  </section>
 
-<!-- تمرینات -->
-<section id="workout">
-<h2>🏃 تمرینات</h2>
-<button id="startWorkout">شروع تمرین</button>
-<button id="stopWorkout">پایان تمرین</button>
-<p id="workoutTimer">مدت تمرین: 0:00</p>
+  <!-- تمرینات -->
+  <section id="workout">
+    <h2>🏃 تمرینات</h2>
+    <button id="startWorkout">شروع تمرین</button>
+    <button id="stopWorkout">پایان تمرین</button>
+    <p id="workoutTimer">مدت تمرین: 0:00</p>
 
-<div>
-<label>⏱️ تایمر استراحت (ثانیه):</label>
-<input type="number" id="restInput" value="60">
-<button id="startRest">شروع استراحت</button>
-<p id="restTimer">زمان باقی‌مانده: -</p>
-</div>
-</section>
+    <div>
+      <label>⏱️ تایمر استراحت (ثانیه):</label>
+      <input type="number" id="restInput" value="60">
+      <button id="startRest">شروع استراحت</button>
+      <p id="restTimer">زمان باقی‌مانده: -</p>
+    </div>
+  </section>
 
-<!-- ژورنال -->
-<section id="journal">
-<h2>📓 ژورنال روزانه</h2>
-<textarea id="journalInput" placeholder="یادداشت امروز..."></textarea>
-<button id="saveJournal">💾 ذخیره</button>
-<input type="text" id="journalSearch" placeholder="جستجو در ژورنال">
-<ul id="journalHistory"></ul>
-</section>
+  <!-- ژورنال -->
+  <section id="journal">
+    <h2>📓 ژورنال روزانه</h2>
+    <textarea id="journalInput" placeholder="یادداشت امروز..."></textarea>
+    <button id="saveJournal">💾 ذخیره</button>
+    <input type="text" id="journalSearch" placeholder="جستجو در ژورنال">
+    <ul id="journalHistory"></ul>
+  </section>
 
-<!-- گیمفیکیشن -->
-<section id="gamification">
-<h2>🏅 مدال‌ها و سطح</h2>
-<p id="streak">Streak: 0 روز</p>
-<p id="level">سطح: 1</p>
-<div id="medals"></div>
-</section>
+  <!-- گیمیفیکیشن -->
+  <section id="gamification">
+    <h2>🏅 مدال‌ها و سطح</h2>
+    <p id="streak">Streak: 0 روز</p>
+    <p id="level">سطح: 1</p>
+    <div id="medals"></div>
+  </section>
 </main>
 
 <footer>
-<p>© 2025 | سوپر اپ فیتنس</p>
+  <p>© 2025 | سوپر اپ فیتنس</p>
 </footer>
 
 <script src="script.js"></script>
