@@ -2,6 +2,7 @@ const form = document.getElementById('reportForm');
 const reportList = document.getElementById('reportList');
 
 let reports = JSON.parse(localStorage.getItem('reports')) || [];
+let editIndex = -1;
 
 function saveReports() {
   localStorage.setItem('reports', JSON.stringify(reports));
@@ -15,6 +16,7 @@ function renderReports() {
       <strong>${report.date} - ${report.title}</strong>
       <p>${report.description}</p>
       <em>${report.status}</em>
+      <button class="edit-btn" onclick="editReport(${index})">ویرایش</button>
       <button onclick="deleteReport(${index})">حذف</button>
     `;
     reportList.appendChild(li);
@@ -22,9 +24,20 @@ function renderReports() {
 }
 
 function deleteReport(index) {
-  reports.splice(index, 1);
-  saveReports();
-  renderReports();
+  if(confirm("آیا مطمئن هستید می‌خواهید این گزارش را حذف کنید؟")) {
+    reports.splice(index, 1);
+    saveReports();
+    renderReports();
+  }
+}
+
+function editReport(index) {
+  const report = reports[index];
+  document.getElementById('date').value = report.date;
+  document.getElementById('title').value = report.title;
+  document.getElementById('description').value = report.description;
+  document.getElementById('status').value = report.status;
+  editIndex = index;
 }
 
 form.addEventListener('submit', (e) => {
@@ -35,7 +48,14 @@ form.addEventListener('submit', (e) => {
     description: document.getElementById('description').value,
     status: document.getElementById('status').value
   };
-  reports.unshift(report);
+  
+  if(editIndex >= 0) {
+    reports[editIndex] = report;
+    editIndex = -1;
+  } else {
+    reports.unshift(report);
+  }
+
   saveReports();
   renderReports();
   form.reset();
