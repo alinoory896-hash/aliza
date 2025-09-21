@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>گزارش کار روزانه حرفه‌ای</title>
+  <title>سوپر گزارش کار روزانه</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>گزارش کار روزانه</h1>
+    <div class="header">
+      <h1>سوپر گزارش کار روزانه</h1>
+      <button id="toggleDark">🌙</button>
+    </div>
+
     <form id="reportForm">
       <input type="date" id="date" required>
       <input type="text" id="title" placeholder="عنوان گزارش" required>
@@ -27,6 +31,11 @@
         <option>در حال انجام</option>
         <option>انجام شد</option>
       </select>
+      <select id="sortOrder">
+        <option value="newest">جدیدترین</option>
+        <option value="oldest">قدیمی‌ترین</option>
+      </select>
+      <button id="deleteAll">حذف همه</button>
     </div>
 
     <div class="summary">
@@ -37,6 +46,7 @@
 
     <ul id="reportList"></ul>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

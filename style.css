@@ -1,21 +1,42 @@
+:root {
+  --bg-light: #f5f7fa;
+  --bg-dark: #1e1e1e;
+  --card-light: #f0f4ff;
+  --card-dark: #2a2a2a;
+  --text-light: #333;
+  --text-dark: #eee;
+  --done-color: #4caf50;
+  --pending-color: #ff9800;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
   margin: 0;
   padding: 20px;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background 0.3s, color 0.3s;
+}
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 .container {
-  max-width: 650px;
+  max-width: 700px;
   margin: auto;
   background: #fff;
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: background 0.3s;
 }
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+body.dark .container {
+  background: #2a2a2a;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 form input, form textarea, form select, form button {
   width: 100%;
@@ -24,6 +45,7 @@ form input, form textarea, form select, form button {
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 15px;
+  transition: border 0.2s, box-shadow 0.2s;
 }
 form input:focus, form textarea:focus, form select:focus {
   outline: none;
@@ -38,57 +60,41 @@ form button {
   cursor: pointer;
   transition: background 0.3s;
 }
-form button:hover {
-  background: #0056b3;
-}
+form button:hover { background: #0056b3; }
 
 .controls {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin: 15px 0;
 }
-.controls input, .controls select {
+.controls input, .controls select, .controls button {
   flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
+.controls button { background:red; color:#fff; border:none; cursor:pointer; }
+.controls button:hover { background:darkred; }
 
-.summary {
-  margin-bottom: 15px;
-  font-weight: bold;
-  color: #555;
-}
+.summary { margin-bottom: 15px; font-weight: bold; }
 
-#reportList {
-  list-style: none;
-  padding: 0;
-  max-height: 400px;
-  overflow-y: auto;
-}
+#reportList { list-style: none; padding: 0; max-height: 400px; overflow-y: auto; }
 li {
-  background: #f0f4ff;
+  background: var(--card-light);
   padding: 15px;
   margin-bottom: 12px;
   border-radius: 10px;
   position: relative;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
 }
-li:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-}
-li strong {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-li p {
-  margin: 5px 0;
-}
-li em {
-  font-style: normal;
-  color: #555;
-  font-size: 14px;
-}
+body.dark li { background: var(--card-dark); }
+li:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+li strong { display: block; margin-bottom: 6px; }
+li p { margin: 5px 0; }
+li em { font-style: normal; font-size: 14px; }
+
 li button {
   position: absolute;
   top: 15px;
@@ -100,17 +106,10 @@ li button {
   font-size: 13px;
   transition: background 0.2s;
 }
-li .delete-btn {
-  right: 15px;
-  background: red;
-}
-li .delete-btn:hover {
-  background: darkred;
-}
-li .edit-btn {
-  right: 90px;
-  background: orange;
-}
-li .edit-btn:hover {
-  background: darkorange;
-}
+li .delete-btn { right: 15px; background: red; }
+li .delete-btn:hover { background: darkred; }
+li .edit-btn { right: 90px; background: orange; }
+li .edit-btn:hover { background: darkorange; }
+
+.done { border-left: 5px solid var(--done-color); }
+.pending { border-left: 5px solid var(--pending-color); }

@@ -2,12 +2,18 @@ const form = document.getElementById('reportForm');
 const reportList = document.getElementById('reportList');
 const searchInput = document.getElementById('searchInput');
 const filterStatus = document.getElementById('filterStatus');
+const sortOrder = document.getElementById('sortOrder');
 const totalCount = document.getElementById('totalCount');
 const doneCount = document.getElementById('doneCount');
 const pendingCount = document.getElementById('pendingCount');
+const toggleDark = document.getElementById('toggleDark');
+const deleteAllBtn = document.getElementById('deleteAll');
 
 let reports = JSON.parse(localStorage.getItem('reports')) || [];
 let editIndex = -1;
+let darkMode = localStorage.getItem('darkMode') === 'true';
+
+if(darkMode) document.body.classList.add('dark');
 
 function saveReports() {
   localStorage.setItem('reports', JSON.stringify(reports));
@@ -25,13 +31,19 @@ function updateSummary() {
 function renderReports() {
   const searchTerm = searchInput.value.toLowerCase();
   const statusFilter = filterStatus.value;
+  const order = sortOrder.value;
 
   reportList.innerHTML = '';
-  reports.forEach((report, index) => {
-    if (statusFilter && report.status !== statusFilter) return;
-    if (searchTerm && !report.title.toLowerCase().includes(searchTerm)) return;
+  let displayReports = [...reports];
+
+  if(order === 'oldest') displayReports.reverse();
+
+  displayReports.forEach((report, index) => {
+    if(statusFilter && report.status !== statusFilter) return;
+    if(searchTerm && !report.title.toLowerCase().includes(searchTerm)) return;
 
     const li = document.createElement('li');
+    li.className = report.status === "انجام شد" ? 'done' : 'pending';
     li.innerHTML = `
       <strong>${report.date} - ${report.title}</strong>
       <p>${report.description}</p>
@@ -84,5 +96,20 @@ form.addEventListener('submit', (e) => {
 
 searchInput.addEventListener('input', renderReports);
 filterStatus.addEventListener('change', renderReports);
+sortOrder.addEventListener('change', renderReports);
+
+toggleDark.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  darkMode = document.body.classList.contains('dark');
+  localStorage.setItem('darkMode', darkMode);
+});
+
+deleteAllBtn.addEventListener('click', () => {
+  if(confirm("آیا مطمئن هستید که می‌خواهید همه گزارش‌ها حذف شوند؟")) {
+    reports = [];
+    saveReports();
+    renderReports();
+  }
+});
 
 renderReports();
