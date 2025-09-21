@@ -1,66 +1,85 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سوپر گزارش کار روزانه با داشبورد</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سوپر گزارش کار حرفه‌ای</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>سوپر گزارش کار روزانه</h1>
-      <button id="toggleDark">🌙</button>
-    </div>
-
-    <form id="reportForm">
-      <input type="date" id="date" required>
-      <input type="text" id="title" placeholder="عنوان گزارش" required>
-      <textarea id="description" placeholder="توضیحات" required></textarea>
-      <select id="status">
-        <option>در حال انجام</option>
-        <option>انجام شد</option>
-      </select>
-      <input type="text" id="category" placeholder="دسته‌بندی">
-      <button type="submit">ثبت گزارش</button>
-    </form>
-
-    <div class="controls">
-      <input type="text" id="searchInput" placeholder="جستجو بر اساس عنوان">
-      <select id="filterStatus">
-        <option value="">همه وضعیت‌ها</option>
-        <option>در حال انجام</option>
-        <option>انجام شد</option>
-      </select>
-      <select id="filterCategory">
-        <option value="">همه دسته‌ها</option>
-      </select>
-      <select id="sortOrder">
-        <option value="newest">جدیدترین</option>
-        <option value="oldest">قدیمی‌ترین</option>
-      </select>
-      <button id="deleteAll">حذف همه</button>
-      <button id="exportData">خروجی JSON</button>
-      <input type="file" id="importData" accept=".json">
-    </div>
-
-    <div class="summary">
-      <span id="totalCount">تعداد کل: 0</span> |
-      <span id="doneCount">انجام شده: 0</span> |
-      <span id="pendingCount">در حال انجام: 0</span>
-    </div>
-
-    <div class="dashboard">
-      <h2>داشبورد آماری</h2>
-      <canvas id="statusChart" height="150"></canvas>
-      <canvas id="categoryChart" height="150"></canvas>
-      <canvas id="dateChart" height="150"></canvas>
-    </div>
-
-    <ul id="reportList"></ul>
+<div class="container">
+  <div class="header">
+    <h1>سوپر گزارش کار روزانه</h1>
+    <button id="toggleDark">🌙</button>
   </div>
 
-  <script src="script.js"></script>
+  <form id="reportForm">
+    <input type="date" id="date" required>
+    <input type="text" id="title" placeholder="عنوان گزارش" required>
+    <textarea id="description" placeholder="توضیحات" required></textarea>
+    <select id="status">
+      <option>در حال انجام</option>
+      <option>انجام شد</option>
+      <option>انجام نشد</option>
+    </select>
+    <input type="text" id="category" placeholder="دسته‌بندی">
+    <input type="text" id="tags" placeholder="تگ‌ها (کامای جداکننده)">
+    <button type="submit">ثبت گزارش</button>
+  </form>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="جستجو بر اساس عنوان یا تگ">
+    <select id="filterStatus">
+      <option value="">همه وضعیت‌ها</option>
+      <option>در حال انجام</option>
+      <option>انجام شد</option>
+      <option>انجام نشد</option>
+    </select>
+    <select id="filterCategory">
+      <option value="">همه دسته‌ها</option>
+    </select>
+    <select id="sortOrder">
+      <option value="newest">جدیدترین</option>
+      <option value="oldest">قدیمی‌ترین</option>
+    </select>
+    <button id="deleteAll">حذف همه</button>
+    <button id="exportData">خروجی JSON/CSV</button>
+    <input type="file" id="importData" accept=".json,.csv">
+  </div>
+
+  <div class="summary">
+    <span id="totalCount">تعداد کل: 0</span> |
+    <span id="doneCount">انجام شده: 0</span> |
+    <span id="pendingCount">در حال انجام: 0</span> |
+    <span id="failedCount">انجام نشد: 0</span>
+  </div>
+
+  <div class="progress-bars">
+    <div class="progress-bar-container">
+      <span>انجام شد:</span>
+      <div class="progress"><div id="doneBar"></div></div>
+    </div>
+    <div class="progress-bar-container">
+      <span>در حال انجام:</span>
+      <div class="progress"><div id="pendingBar"></div></div>
+    </div>
+    <div class="progress-bar-container">
+      <span>انجام نشد:</span>
+      <div class="progress"><div id="failedBar"></div></div>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <h2>داشبورد آماری</h2>
+    <canvas id="statusChart" height="150"></canvas>
+    <canvas id="categoryChart" height="150"></canvas>
+    <canvas id="dateChart" height="150"></canvas>
+  </div>
+
+  <ul id="reportList"></ul>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
