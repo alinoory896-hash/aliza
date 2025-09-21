@@ -1,36 +1,62 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>گزارش روزانه</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سوپر اپ گزارش روزانه</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+  <header>
+    <h1>📅 سوپر اپ گزارش روزانه</h1>
+    <button id="toggle-theme">🌓 تغییر تم</button>
+  </header>
 
-  <h1>📅 گزارش روزانه</h1>
-  <p id="date"></p>
+  <section id="date-section">
+    <h2>تاریخ امروز: <span id="today"></span></h2>
+  </section>
 
-  <div class="card">
-    <h2>وعده‌های غذایی</h2>
-    <div class="item"><span>🥚 صبحانه</span><input type="checkbox" class="check" data-type="meal"></div>
-    <div class="item"><span>🥤 میان‌وعده ۱</span><input type="checkbox" class="check" data-type="meal"></div>
-    <div class="item"><span>🍗 ناهار</span><input type="checkbox" class="check" data-type="meal"></div>
-    <div class="item"><span>🍌 قبل تمرین</span><input type="checkbox" class="check" data-type="meal"></div>
-    <div class="item"><span>💪 بعد تمرین</span><input type="checkbox" class="check" data-type="meal"></div>
-    <div class="item"><span>🥩 شام</span><input type="checkbox" class="check" data-type="meal"></div>
-    <div class="item"><span>🥛 قبل خواب</span><input type="checkbox" class="check" data-type="meal"></div>
-  </div>
+  <main>
+    <section class="card">
+      <h3>🍽️ وعده‌های غذایی</h3>
+      <label><input type="checkbox" class="meal" data-cal="400"> صبحانه</label>
+      <label><input type="checkbox" class="meal" data-cal="600"> ناهار</label>
+      <label><input type="checkbox" class="meal" data-cal="500"> شام</label>
+      <label><input type="checkbox" class="meal" data-cal="200"> میان‌وعده</label>
+      <p>مجموع کالری: <span id="total-cal">0</span> کیلوکالری</p>
+    </section>
 
-  <div class="card">
-    <h2>تمرینات امروز</h2>
-    <div id="workouts"></div>
-  </div>
+    <section class="card">
+      <h3>💊 مکمل‌ها</h3>
+      <label><input type="checkbox" class="supplement"> کراتین</label>
+      <label><input type="checkbox" class="supplement"> پروتئین وی</label>
+      <label><input type="checkbox" class="supplement"> مولتی‌ویتامین</label>
+    </section>
 
-  <div class="card">
-    <h2>پیشرفت امروز</h2>
-    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-    <p id="progressText">0%</p>
-  </div>
+    <section class="card">
+      <h3>🏋️‍♂️ تمرینات</h3>
+      <label><input type="checkbox" class="workout"> اسکوات</label>
+      <label><input type="checkbox" class="workout"> پرس سینه</label>
+      <label><input type="checkbox" class="workout"> ددلیفت</label>
+      <button id="start-timer">⏱️ تایمر استراحت</button>
+      <p id="timer-display">00:00</p>
+    </section>
+
+    <section class="card">
+      <h3>📊 آمار</h3>
+      <canvas id="progressChart"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <button id="save-report">💾 ذخیره گزارش</button>
+    <button id="download-pdf">📄 خروجی PDF</button>
+    <button id="notify">🔔 یادآوری</button>
+  </footer>
 
   <script src="script.js"></script>
 </body>
