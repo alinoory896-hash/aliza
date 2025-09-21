@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سوپر گزارش کار روزانه نهایی</title>
+  <title>سوپر گزارش کار روزانه با داشبورد</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
@@ -48,6 +49,13 @@
       <span id="totalCount">تعداد کل: 0</span> |
       <span id="doneCount">انجام شده: 0</span> |
       <span id="pendingCount">در حال انجام: 0</span>
+    </div>
+
+    <div class="dashboard">
+      <h2>داشبورد آماری</h2>
+      <canvas id="statusChart" height="150"></canvas>
+      <canvas id="categoryChart" height="150"></canvas>
+      <canvas id="dateChart" height="150"></canvas>
     </div>
 
     <ul id="reportList"></ul>
