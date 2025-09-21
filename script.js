@@ -1,5 +1,10 @@
 const form = document.getElementById('reportForm');
 const reportList = document.getElementById('reportList');
+const searchInput = document.getElementById('searchInput');
+const filterStatus = document.getElementById('filterStatus');
+const totalCount = document.getElementById('totalCount');
+const doneCount = document.getElementById('doneCount');
+const pendingCount = document.getElementById('pendingCount');
 
 let reports = JSON.parse(localStorage.getItem('reports')) || [];
 let editIndex = -1;
@@ -8,19 +13,35 @@ function saveReports() {
   localStorage.setItem('reports', JSON.stringify(reports));
 }
 
+function updateSummary() {
+  const total = reports.length;
+  const done = reports.filter(r => r.status === "انجام شد").length;
+  const pending = reports.filter(r => r.status === "در حال انجام").length;
+  totalCount.textContent = `تعداد کل: ${total}`;
+  doneCount.textContent = `انجام شده: ${done}`;
+  pendingCount.textContent = `در حال انجام: ${pending}`;
+}
+
 function renderReports() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const statusFilter = filterStatus.value;
+
   reportList.innerHTML = '';
   reports.forEach((report, index) => {
+    if (statusFilter && report.status !== statusFilter) return;
+    if (searchTerm && !report.title.toLowerCase().includes(searchTerm)) return;
+
     const li = document.createElement('li');
     li.innerHTML = `
       <strong>${report.date} - ${report.title}</strong>
       <p>${report.description}</p>
       <em>${report.status}</em>
       <button class="edit-btn" onclick="editReport(${index})">ویرایش</button>
-      <button onclick="deleteReport(${index})">حذف</button>
+      <button class="delete-btn" onclick="deleteReport(${index})">حذف</button>
     `;
     reportList.appendChild(li);
   });
+  updateSummary();
 }
 
 function deleteReport(index) {
@@ -48,7 +69,7 @@ form.addEventListener('submit', (e) => {
     description: document.getElementById('description').value,
     status: document.getElementById('status').value
   };
-  
+
   if(editIndex >= 0) {
     reports[editIndex] = report;
     editIndex = -1;
@@ -60,5 +81,8 @@ form.addEventListener('submit', (e) => {
   renderReports();
   form.reset();
 });
+
+searchInput.addEventListener('input', renderReports);
+filterStatus.addEventListener('change', renderReports);
 
 renderReports();

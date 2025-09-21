@@ -5,7 +5,7 @@ body {
   padding: 20px;
 }
 .container {
-  max-width: 600px;
+  max-width: 650px;
   margin: auto;
   background: #fff;
   padding: 25px;
@@ -15,7 +15,7 @@ body {
 h1 {
   text-align: center;
   color: #333;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 form input, form textarea, form select, form button {
   width: 100%;
@@ -42,10 +42,24 @@ form button:hover {
   background: #0056b3;
 }
 
+.controls {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+.controls input, .controls select {
+  flex: 1;
+}
+
+.summary {
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #555;
+}
+
 #reportList {
   list-style: none;
   padding: 0;
-  margin-top: 20px;
   max-height: 400px;
   overflow-y: auto;
 }
@@ -56,6 +70,11 @@ li {
   border-radius: 10px;
   position: relative;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 li strong {
   display: block;
@@ -73,21 +92,23 @@ li em {
 li button {
   position: absolute;
   top: 15px;
-  right: 15px;
-  background: red;
+  padding: 5px 10px;
   border: none;
   color: #fff;
-  padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 13px;
   transition: background 0.2s;
 }
-li button:hover {
+li .delete-btn {
+  right: 15px;
+  background: red;
+}
+li .delete-btn:hover {
   background: darkred;
 }
 li .edit-btn {
-  right: 70px;
+  right: 90px;
   background: orange;
 }
 li .edit-btn:hover {

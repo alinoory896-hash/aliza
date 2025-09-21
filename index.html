@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>گزارش کار روزانه</title>
+  <title>گزارش کار روزانه حرفه‌ای</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +19,22 @@
       </select>
       <button type="submit">ثبت گزارش</button>
     </form>
+
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="جستجو بر اساس عنوان">
+      <select id="filterStatus">
+        <option value="">همه وضعیت‌ها</option>
+        <option>در حال انجام</option>
+        <option>انجام شد</option>
+      </select>
+    </div>
+
+    <div class="summary">
+      <span id="totalCount">تعداد کل: 0</span> |
+      <span id="doneCount">انجام شده: 0</span> |
+      <span id="pendingCount">در حال انجام: 0</span>
+    </div>
+
     <ul id="reportList"></ul>
   </div>
   <script src="script.js"></script>
