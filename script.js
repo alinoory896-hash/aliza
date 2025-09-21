@@ -112,7 +112,7 @@ function renderJournal(search = "") {
 }
 renderJournal();
 
-// --- گیمفیکیشن ---
+// --- گیمیفیکیشن ---
 function updateGamification() {
     document.getElementById("streak").textContent = `Streak: ${streak} روز`;
     document.getElementById("level").textContent = `سطح: ${level}`;
