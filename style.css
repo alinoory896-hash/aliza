@@ -1,36 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+
 body {
-  font-family: sans-serif;
-  background: #f8f9fa;
-  direction: rtl;
-  text-align: right;
-  padding: 20px;
+  font-family: 'Vazirmatn', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
 }
-.card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
+
+:root {
+  --bg: #f7f7f7;
+  --text: #222;
+  --card-bg: #fff;
+}
+
+body.dark {
+  --bg: #121212;
+  --text: #eee;
+  --card-bg: #1e1e1e;
+}
+
+header {
+  text-align: center;
+  padding: 1rem;
+  background: var(--card-bg);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-h2 { 
-  margin-top: 0; 
-  color: #007bff; 
+
+h1 {
+  margin: 0;
 }
-.item {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 1rem;
+  padding: 1rem;
 }
-.progress {
-  background: #e9ecef;
-  border-radius: 20px;
-  overflow: hidden;
-  height: 15px;
-  margin-top: 10px;
+
+.card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-.progress-bar {
-  background: #28a745;
-  height: 100%;
-  width: 0%;
-  transition: width 0.3s;
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--card-bg);
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+label {
+  display: block;
+  margin: 0.3rem 0;
 }
