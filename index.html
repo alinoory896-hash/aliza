@@ -18,7 +18,7 @@
   <section id="dashboard">
     <h2>📊 داشبورد</h2>
     <canvas id="progressChart"></canvas>
-    <canvas id="weightChart"></canvas>
+    <canvas id="workoutChart"></canvas>
     <div id="motivationCard"></div>
   </section>
 
@@ -26,11 +26,11 @@
   <section id="meals">
     <h2>🍽️ مدیریت وعده‌ها</h2>
     <form id="mealForm">
-      <input type="text" id="mealName" placeholder="نام غذا">
-      <input type="number" id="mealCalories" placeholder="کالری">
-      <input type="number" id="mealProtein" placeholder="پروتئین">
-      <input type="number" id="mealCarbs" placeholder="کربوهیدرات">
-      <input type="number" id="mealFat" placeholder="چربی">
+      <input type="text" id="mealName" placeholder="نام غذا" required>
+      <input type="number" id="mealCalories" placeholder="کالری" required>
+      <input type="number" id="mealProtein" placeholder="پروتئین" required>
+      <input type="number" id="mealCarbs" placeholder="کربوهیدرات" required>
+      <input type="number" id="mealFat" placeholder="چربی" required>
       <button type="submit">➕ اضافه</button>
     </form>
     <ul id="mealList"></ul>
@@ -40,11 +40,12 @@
   <!-- تمرینات -->
   <section id="workout">
     <h2>🏃 تمرینات</h2>
-    <button id="startWorkout">شروع تمرین</button>
-    <button id="stopWorkout">پایان تمرین</button>
-    <p id="workoutTimer">مدت تمرین: 0:00</p>
-
-    <div>
+    <div class="workout-controls">
+      <button id="startWorkout">شروع تمرین</button>
+      <button id="stopWorkout">پایان تمرین</button>
+      <p id="workoutTimer">مدت تمرین: 0:00</p>
+    </div>
+    <div class="rest-controls">
       <label>⏱️ تایمر استراحت (ثانیه):</label>
       <input type="number" id="restInput" value="60">
       <button id="startRest">شروع استراحت</button>
