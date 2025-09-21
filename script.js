@@ -1,97 +1,83 @@
-// === تاریخ شمسی ===
-function toJalali(date) {
-  const gYear = date.getFullYear();
-  const gMonth = date.getMonth() + 1;
-  const gDay = date.getDate();
-  const d = new Date(gYear, gMonth - 1, gDay);
-  return d.toLocaleDateString("fa-IR");
-}
-document.getElementById("today").innerText = toJalali(new Date());
+// داده‌ها
+let meals = JSON.parse(localStorage.getItem("meals")) || [];
+let journals = JSON.parse(localStorage.getItem("journals")) || [];
+let weightHistory = JSON.parse(localStorage.getItem("weightHistory")) || [];
+let streak = parseInt(localStorage.getItem("streak") || 0);
+let level = parseInt(localStorage.getItem("level") || 1);
+let workoutSeconds = 0;
+let workoutInterval, restInterval;
 
-// === دارک/لایت مود ===
-const toggleBtn = document.getElementById("toggle-theme");
-toggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+// --- تم ---
+document.getElementById("toggleTheme").addEventListener("click",()=>document.body.classList.toggle("dark"));
+
+// --- مدیریت وعده‌ها ---
+const mealForm = document.getElementById("mealForm");
+const mealList = document.getElementById("mealList");
+const mealSummary = document.getElementById("mealSummary");
+
+mealForm.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const name=document.getElementById("mealName").value;
+    const calories=parseInt(document.getElementById("mealCalories").value)||0;
+    const protein=parseInt(document.getElementById("mealProtein").value)||0;
+    const carbs=parseInt(document.getElementById("mealCarbs").value)||0;
+    const fat=parseInt(document.getElementById("mealFat").value)||0;
+    if(!name) return;
+    meals.push({name,calories,protein,carbs,fat});
+    localStorage.setItem("meals",JSON.stringify(meals));
+    renderMeals();
+    mealForm.reset();
 });
-if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
-
-// === کالری ===
-const mealCheckboxes = document.querySelectorAll(".meal");
-const totalCalEl = document.getElementById("total-cal");
-mealCheckboxes.forEach(cb => cb.addEventListener("change", updateCalories));
-function updateCalories() {
-  let total = 0;
-  mealCheckboxes.forEach(cb => {
-    if (cb.checked) total += parseInt(cb.dataset.cal);
-  });
-  totalCalEl.textContent = total;
-}
-
-// === تایمر تمرین ===
-let timer;
-document.getElementById("start-timer").addEventListener("click", () => {
-  let seconds = 60; // 1 دقیقه استراحت
-  clearInterval(timer);
-  timer = setInterval(() => {
-    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
-    const s = String(seconds % 60).padStart(2, "0");
-    document.getElementById("timer-display").textContent = `${m}:${s}`;
-    if (seconds-- <= 0) clearInterval(timer);
-  }, 1000);
-});
-
-// === نمودار ===
-const ctx = document.getElementById("progressChart").getContext("2d");
-let chart = new Chart(ctx, {
-  type: "doughnut",
-  data: {
-    labels: ["غذا", "مکمل", "تمرین"],
-    datasets: [{
-      data: [0,0,0],
-      backgroundColor: ["#ff6384","#36a2eb","#4caf50"]
-    }]
-  }
-});
-function updateChart() {
-  const meals = document.querySelectorAll(".meal:checked").length;
-  const sups = document.querySelectorAll(".supplement:checked").length;
-  const workouts = document.querySelectorAll(".workout:checked").length;
-  chart.data.datasets[0].data = [meals, sups, workouts];
-  chart.update();
-}
-document.querySelectorAll("input").forEach(i => i.addEventListener("change", updateChart));
-
-// === ذخیره سازی ===
-document.getElementById("save-report").addEventListener("click", () => {
-  const report = {
-    date: toJalali(new Date()),
-    calories: totalCalEl.textContent,
-    meals: [...mealCheckboxes].map(cb => cb.checked),
-    supplements: [...document.querySelectorAll(".supplement")].map(cb => cb.checked),
-    workouts: [...document.querySelectorAll(".workout")].map(cb => cb.checked)
-  };
-  localStorage.setItem("report", JSON.stringify(report));
-  alert("گزارش ذخیره شد ✅");
-});
-
-// === خروجی PDF ===
-document.getElementById("download-pdf").addEventListener("click", () => {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  doc.text("گزارش روزانه", 10, 10);
-  doc.text("تاریخ: " + toJalali(new Date()), 10, 20);
-  doc.text("کالری: " + totalCalEl.textContent, 10, 30);
-  doc.save("report.pdf");
-});
-
-// === نوتیفیکیشن ===
-document.getElementById("notify").addEventListener("click", () => {
-  if (Notification.permission === "granted") {
-    new Notification("وقت تمرین شد 🏋️‍♂️");
-  } else {
-    Notification.requestPermission().then(p => {
-      if (p === "granted") new Notification("یادآوری فعال شد ✅");
+function renderMeals(){
+    mealList.innerHTML="";
+    let totalCal=0;
+    meals.forEach((m)=>{
+        totalCal+=m.calories;
+        const li=document.createElement("li");
+        li.textContent=`${m.name} - ${m.calories} کالری - ${m.protein} پروتئین - ${m.carbs} کربوهیدرات - ${m.fat} چربی`;
+        mealList.appendChild(li);
     });
-  }
+    mealSummary.textContent=`جمع کل کالری: ${totalCal}`;
+}
+renderMeals();
+
+// --- تایمر تمرین ---
+document.getElementById("startWorkout").addEventListener("click",()=>{
+    clearInterval(workoutInterval);
+    workoutInterval=setInterval(()=>{
+        workoutSeconds++;
+        document.getElementById("workoutTimer").textContent=`مدت تمرین: ${Math.floor(workoutSeconds/60)}:${("0"+workoutSeconds%60).slice(-2)}`;
+    },1000);
 });
+document.getElementById("stopWorkout").addEventListener("click",()=>{
+    clearInterval(workoutInterval);
+    workoutSeconds=0;
+    document.getElementById("workoutTimer").textContent="مدت تمرین: 0:00";
+});
+document.getElementById("startRest").addEventListener("click",()=>{
+    let restTime=parseInt(document.getElementById("restInput").value);
+    clearInterval(restInterval);
+    restInterval=setInterval(()=>{
+        if(restTime<=0){
+            clearInterval(restInterval);
+            document.getElementById("restTimer").textContent="زمان استراحت تمام شد!";
+            if(Notification.permission==="granted") new Notification("⏱️ وقت تمرین شد!");
+        }else{
+            document.getElementById("restTimer").textContent=`زمان باقی‌مانده: ${restTime--} ثانیه`;
+        }
+    },1000);
+});
+
+// --- ژورنال ---
+const journalInput=document.getElementById("journalInput");
+const journalHistory=document.getElementById("journalHistory");
+document.getElementById("saveJournal").addEventListener("click",()=>{
+    const text=journalInput.value;
+    if(!text) return;
+    const entry={date:new Date().toLocaleDateString("fa-IR"),text};
+    journals.push(entry);
+    localStorage.setItem("journals",JSON.stringify(journals));
+    renderJournal();
+    journalInput.value="";
+});
+function
