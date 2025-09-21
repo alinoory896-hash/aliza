@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرم روزانه</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>پیگیری روزانه</h1>
+
+    <form id="dailyForm">
+      <label for="exerciseDone">تمرین انجام شد؟</label>
+      <select id="exerciseDone" required>
+        <option value="">انتخاب کنید</option>
+        <option value="بله">بله</option>
+        <option value="خیر">خیر</option>
+      </select>
+
+      <label for="notes">یادداشت:</label>
+      <textarea id="notes" placeholder="یادداشت امروز را بنویس..." rows="4"></textarea>
+
+      <button type="submit">ثبت</button>
+    </form>
+
+    <div id="log"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
