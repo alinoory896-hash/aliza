@@ -3,30 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>فرم روزانه</title>
+  <title>گزارش کار روزانه</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>پیگیری روزانه</h1>
-
-    <form id="dailyForm">
-      <label for="exerciseDone">تمرین انجام شد؟</label>
-      <select id="exerciseDone" required>
-        <option value="">انتخاب کنید</option>
-        <option value="بله">بله</option>
-        <option value="خیر">خیر</option>
+    <h1>گزارش کار روزانه</h1>
+    <form id="reportForm">
+      <input type="date" id="date" required>
+      <input type="text" id="title" placeholder="عنوان گزارش" required>
+      <textarea id="description" placeholder="توضیحات" required></textarea>
+      <select id="status">
+        <option>در حال انجام</option>
+        <option>انجام شد</option>
       </select>
-
-      <label for="notes">یادداشت:</label>
-      <textarea id="notes" placeholder="یادداشت امروز را بنویس..." rows="4"></textarea>
-
-      <button type="submit">ثبت</button>
+      <button type="submit">ثبت گزارش</button>
     </form>
-
-    <div id="log"></div>
+    <ul id="reportList"></ul>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>

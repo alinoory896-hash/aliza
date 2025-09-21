@@ -1,73 +1,55 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  font-family: Tahoma, sans-serif;
-  margin: 0;
-  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: sans-serif;
+  background: #f5f5f5;
+  padding: 20px;
 }
-
 .container {
+  max-width: 500px;
+  margin: auto;
   background: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
 }
-
-form label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #555;
-}
-
-select, textarea {
+form input, form textarea, form select, form button {
   width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-
-button {
-  margin-top: 20px;
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background-color: #28a745;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background-color: #218838;
-}
-
-#log {
-  margin-top: 25px;
-}
-
-#log p {
-  background: #f0f0f0;
   padding: 10px;
-  border-radius: 8px;
   margin-bottom: 10px;
-  word-break: break-word;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+form button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+form button:hover {
+  background: #0056b3;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background: #e9e9e9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  position: relative;
+}
+li button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  border: none;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 3px;
+  cursor: pointer;
 }
