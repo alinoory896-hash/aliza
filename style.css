@@ -1,55 +1,36 @@
-:root {
-  --bg-light:#f5f7fa;
-  --bg-dark:#1e1e1e;
-  --card-light:#f0f4ff;
-  --card-dark:#2a2a2a;
-  --text-light:#333;
-  --text-dark:#eee;
-  --done-color:#4caf50;
-  --pending-color:#ff9800;
-  --failed-color:#f44336;
-  --today-color:#2196f3;
+body {
+  font-family: sans-serif;
+  background: #f8f9fa;
+  direction: rtl;
+  text-align: right;
+  padding: 20px;
 }
-
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:20px;background:var(--bg-light);color:var(--text-light);transition:0.3s}
-body.dark{background:var(--bg-dark);color:var(--text-dark)}
-.container{max-width:800px;margin:auto;background:#fff;padding:25px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:0.3s}
-body.dark .container{background:#2a2a2a}
-
-.header{display:flex;justify-content:space-between;align-items:center}
-form input,form textarea,form select,form button{width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid #ccc;font-size:15px;transition:0.3s}
-form input:focus,form textarea:focus,form select:focus{outline:none;border-color:#007bff;box-shadow:0 0 5px rgba(0,123,255,0.5)}
-form button{background:#007bff;color:#fff;font-weight:bold;border:none;cursor:pointer;transition:0.3s}
-form button:hover{background:#0056b3}
-
-.controls{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}
-.controls input,.controls select,.controls button{flex:1;padding:10px;border-radius:8px;border:1px solid #ccc}
-.controls button{background:red;color:#fff;border:none;cursor:pointer}
-.controls button:hover{background:darkred}
-
-.summary{margin-bottom:15px;font-weight:bold}
-
-.progress-bars{margin:15px 0}
-.progress-bar-container{margin-bottom:10px}
-.progress-bar-container span{font-weight:bold;margin-bottom:4px;display:block}
-.progress{background:#ddd;border-radius:10px;overflow:hidden;height:15px}
-.progress div{height:15px;width:0%;transition:width 0.5s;border-radius:10px}
-
-.dashboard{margin:20px 0}
-#reportList{list-style:none;padding:0;max-height:500px;overflow-y:auto}
-li{background:var(--card-light);padding:15px;margin-bottom:12px;border-radius:10px;position:relative;box-shadow:0 4px 8px rgba(0,0,0,0.05);transition: transform 0.3s, box-shadow 0.3s, background 0.3s}
-body.dark li{background:var(--card-dark)}
-li:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,0.1)}
-li strong{display:block;margin-bottom:6px}
-li p{margin:5px 0}
-li em{font-style:normal;font-size:14px}
-li button{position:absolute;top:15px;padding:5px 10px;border:none;color:#fff;border-radius:5px;cursor:pointer;font-size:13px;transition:0.2s}
-li .delete-btn{right:15px;background:#f44336}
-li .delete-btn:hover{background:darkred}
-li .edit-btn{right:90px;background:orange}
-li .edit-btn:hover{background:darkorange}
-
-.done{border-left:5px solid var(--done-color)}
-.pending{border-left:5px solid var(--pending-color)}
-.failed{border-left:5px solid var(--failed-color)}
-.today{border-left:5px solid var(--today-color)}
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+h2 { 
+  margin-top: 0; 
+  color: #007bff; 
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+.progress {
+  background: #e9ecef;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 15px;
+  margin-top: 10px;
+}
+.progress-bar {
+  background: #28a745;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s;
+}
