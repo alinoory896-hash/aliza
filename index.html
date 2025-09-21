@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سوپر گزارش کار روزانه</title>
+  <title>سوپر گزارش کار روزانه نهایی</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,6 +21,7 @@
         <option>در حال انجام</option>
         <option>انجام شد</option>
       </select>
+      <input type="text" id="category" placeholder="دسته‌بندی">
       <button type="submit">ثبت گزارش</button>
     </form>
 
@@ -31,11 +32,16 @@
         <option>در حال انجام</option>
         <option>انجام شد</option>
       </select>
+      <select id="filterCategory">
+        <option value="">همه دسته‌ها</option>
+      </select>
       <select id="sortOrder">
         <option value="newest">جدیدترین</option>
         <option value="oldest">قدیمی‌ترین</option>
       </select>
       <button id="deleteAll">حذف همه</button>
+      <button id="exportData">خروجی JSON</button>
+      <input type="file" id="importData" accept=".json">
     </div>
 
     <div class="summary">
